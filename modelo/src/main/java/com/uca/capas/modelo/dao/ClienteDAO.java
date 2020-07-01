@@ -26,4 +26,6 @@ public interface ClienteDAO {
 	public int insertClienteAutoId(Cliente c);
 	
 	public void updateCliente(Cliente c);
+	
+	public int ejecutarProcedimientoJdbc(Integer cliente, Boolean estado);
 }

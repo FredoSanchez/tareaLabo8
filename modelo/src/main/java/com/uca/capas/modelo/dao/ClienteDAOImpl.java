@@ -232,5 +232,29 @@ public class ClienteDAOImpl implements ClienteDAO {
 		Object[] parametros = new Object[] {c.getSnombres(), c.getSapellidos(), c.getFnacimiento(), c.getBactivo(), c.getCcliente()};
 		jdbcTemplate.update(sql, parametros);
 	}
+
+	@Override
+	public int ejecutarProcedimientoJdbc(Integer cliente, Boolean estado) {
+		SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withSchemaName("store")
+				.withProcedureName("sp_actualizar_cliente")
+				.withoutProcedureColumnMetaDataAccess();
+		
+		//Se registran los parametros en el objeto correspondiente
+		//Si es parametro de entrada -> new SqlParameter
+		//Si es parametro de salida	 -> new SqlOutParameter
+		jdbcCall.addDeclaredParameter(new SqlParameter("P_CLIENTE", Types.INTEGER));
+		jdbcCall.addDeclaredParameter(new SqlParameter("P_ESTADO", Types.BOOLEAN));
+		jdbcCall.addDeclaredParameter(new SqlOutParameter("P_SALIDA", Types.INTEGER));
+		
+		//Creamos un mapa con los nombres de los parametros y sus valores
+		Map<String, Object> parametros = new HashMap<>();
+		parametros.put("P_CLIENTE", cliente);
+		parametros.put("P_ESTADO", estado);
+		
+		Map<String, Object> out = jdbcCall.execute(parametros);
+		
+		return Integer.parseInt(out.get("P_SALIDA").toString());
+	}
 	
 }

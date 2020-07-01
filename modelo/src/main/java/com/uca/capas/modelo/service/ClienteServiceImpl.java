@@ -246,4 +246,10 @@ public class ClienteServiceImpl implements ClienteService {
 		// TODO Auto-generated method stub
 		clienteDao.updateCliente(c);
 	}
+
+	@Override
+	public int ejecutarProcedimientoJdbc(Integer cliente, Boolean estado) {
+		// TODO Auto-generated method stub
+		return clienteDao.ejecutarProcedimientoJdbc(cliente, estado);
+	}
 }
