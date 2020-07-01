@@ -234,4 +234,16 @@ public class ClienteServiceImpl implements ClienteService {
 
 		return clientes;
 	}
+
+	@Override
+	public int insertClienteAutoId(Cliente c) {
+		// TODO Auto-generated method stub
+		return clienteDao.insertClienteAutoId(c);
+	}
+
+	@Override
+	public void updateCliente(Cliente c) {
+		// TODO Auto-generated method stub
+		clienteDao.updateCliente(c);
+	}
 }

@@ -42,5 +42,9 @@ public interface ClienteService {
 
 	public List<ClienteDTO> getClienteMarca(String marca);
 	/************************************************************************* */
+	
+	public int insertClienteAutoId(Cliente c);
+	
+	public void updateCliente(Cliente c);
 
 }
